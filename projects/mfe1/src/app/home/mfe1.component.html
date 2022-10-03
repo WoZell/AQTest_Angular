@@ -1,0 +1,54 @@
+<style>
+  input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid silver;
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  button {
+    border: 2px solid silver;
+    background-color: white;
+    font-size: 16px;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+  button:active {
+    border-color: black;
+  }
+
+  #container {
+    border: 2px darkred dashed;
+    padding: 20px;
+  }
+</style>
+
+<div id="container">
+  <demo-user></demo-user>
+  <div>
+    <h1 class="heading"><strong>Microfrontend 1 </strong>Demo</h1>
+
+    <div class="req-group">
+      <input
+        type="text"
+        class="form-control"
+        name="requestMessage"
+        placeholder="message to Microfrontend 2"
+        [(ngModel)]="requestMessage"
+      />
+      <button type="button" (click)="sendReq()">
+        Send Data to Microfrontends 2
+      </button>
+    </div>
+  </div>
+</div>

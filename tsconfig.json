@@ -1,0 +1,31 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "ES2020",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "importHelpers": false,
+    "target": "ES2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@demo/auth-lib": [
+          "libs/auth-lib/src/index.ts"
+      ],
+      "@demo/cross-cutting-concern": [
+        "libs/cross-cutting-concern/src/index.ts"
+      ],
+      "@demo/frontend-library": [
+        "libs/frontend-library/src/public-api.ts"
+      ]
+    }
+  }
+}
