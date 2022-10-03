@@ -16,6 +16,17 @@ export class LookupService {
         routePath: 'mfe1',
         ngModuleName: 'Mfe1Module',
       },
+      {
+        // For Loading
+        remoteEntry: 'http://localhost:3001/remoteEntry.js',
+        remoteName: 'mfe2',
+        exposedModule: './Module',
+
+        // For Routing
+        displayName: 'Microfrontend 2',
+        routePath: 'mfe2',
+        ngModuleName: 'Mfe2Module',
+      },
     ] as Microfrontend[]);
   }
 }
