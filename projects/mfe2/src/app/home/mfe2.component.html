@@ -39,9 +39,49 @@
     <h1 class="heading"><strong>Microfrontend 2 </strong>Demo</h1>
 
     <div class="req-group">
-      <div>Table</div>
-      <div>Loading</div>
-      <div>noResults</div>
+      <div class="search_container">
+        <input
+          name="searchTerm"
+          placeholder="type and enter to search"
+          type="text"
+          [(ngModel)]="searchTerm"
+          (keypress)="searchFieldKeypress($event)"
+        />
+        <button (click)="search(searchTerm)">Suchen</button>
+      </div>
+      <!-- Anzeigen nur wenn Daten vorhanden -->
+      <div *ngIf="shownRepos.length > 0 && !loading" class="result_table">
+        <div class="result_cell head">ID</div>
+        <div class="result_cell head">Name</div>
+        <div class="result_cell head">Description</div>
+        <div class="result_cell head">URL</div>
+        <!-- Schleife über Daten, bei jedem zweiten Eintrag: Hintergrundfarbe -->
+        <ng-container *ngFor="let repo of shownRepos; let i = index">
+          <div class="result_cell" [ngClass]="{ result_row_bg: i % 2 }">
+            {{ repo.id }}
+          </div>
+          <div class="result_cell" [ngClass]="{ result_row_bg: i % 2 }">
+            {{ repo.name }}
+          </div>
+          <div class="result_cell" [ngClass]="{ result_row_bg: i % 2 }">
+            {{ repo.description ? repo.description : "no description" }}
+          </div>
+          <div class="result_cell" [ngClass]="{ result_row_bg: i % 2 }">
+            {{ repo.html_url }}
+          </div>
+        </ng-container>
+      </div>
+      <!-- Anzeigen wenn am Laden -->
+      <div class="loading_container" *ngIf="loading">
+        <!-- Ladeanimation -->
+        <div class="loading_bar loading_1"></div>
+        <div class="loading_bar loading_2"></div>
+        <div class="loading_bar loading_3"></div>
+        <div class="loading_bar loading_4"></div>
+        <div class="loading_bar loading_5"></div>
+      </div>
+      <!-- Anzeigen wenn keine Daten vorhanden und nicht am Laden -->
+      <div *ngIf="!loading && shownRepos.length === 0">no data available</div>
     </div>
   </div>
 </div>
