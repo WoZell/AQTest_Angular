@@ -1,3 +1,4 @@
+import { REPO } from './../../models/repo';
 import {
   Component,
   ComponentFactoryResolver,
@@ -16,11 +17,12 @@ import { MessagingService } from '@demo/cross-cutting-concern';
   templateUrl: './mfe2.component.html',
 })
 export class Mfe2Component implements OnInit {
-  requestMessage: string = '';
-  userName = this.authService.userName;
-  loading: boolean = false;
   errorMessage;
+  loading: boolean = false;
   repos: REPO[] = [];
+  searchTerm: string = '';
+  shownRepos: REPO[] = [];
+  userName = this.authService.userName;
   constructor(
     @Inject(MessagingService) private messagingService,
     @Inject(AuthService) private authService,
@@ -33,6 +35,27 @@ export class Mfe2Component implements OnInit {
     console.log('MFE2-message service ID: ' + this.messagingService.getId());
     console.log('MFE2-Auth service ID: ' + this.authService.getId());
     this.getRepos();
+    const sT = this.messagingService._serviceMessage;
+    if (sT) {
+      this.searchTerm = sT;
+      this.search();
+    }
+  }
+
+  search(): void {
+    if (this.searchTerm) {
+      this.shownRepos = this.repos.filter((repo: REPO) => {
+        const description = repo.description
+          ? repo.description
+              .toLowerCase()
+              .includes(this.searchTerm.toLowerCase())
+          : false;
+        const name = repo.name
+          ? repo.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+          : false;
+        return name || description;
+      });
+    } else this.shownRepos = this.repos;
   }
 
   searchFieldKeypress(event: KeyboardEvent): void {
