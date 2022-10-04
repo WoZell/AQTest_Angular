@@ -20,6 +20,7 @@ export class Mfe2Component implements OnInit {
   userName = this.authService.userName;
   loading: boolean = false;
   errorMessage;
+  repos: REPO[] = [];
   constructor(
     @Inject(MessagingService) private messagingService,
     @Inject(AuthService) private authService,
@@ -31,6 +32,7 @@ export class Mfe2Component implements OnInit {
   ngOnInit(): void {
     console.log('MFE2-message service ID: ' + this.messagingService.getId());
     console.log('MFE2-Auth service ID: ' + this.authService.getId());
+    this.getRepos();
   }
 
   sendReq() {
@@ -40,5 +42,15 @@ export class Mfe2Component implements OnInit {
     this.messagingService.setMessage(this.requestMessage);
   }
 
-  public getRepos() {}
+  public getRepos(): void {
+    this.loading = true;
+    const url = `https://api.github.com/users/${this.userName}/repos`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        this.repos = data;
+        this.search();
+        this.loading = false;
+      });
+  }
 }
