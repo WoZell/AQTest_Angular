@@ -11,18 +11,18 @@
   }
 
   button {
-    border: 2px solid silver;
     background-color: white;
-    font-size: 16px;
-    padding: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
+    border: 2px solid silver;
     border-radius: 10px;
-    margin-bottom: 20px;
-    margin-top: 20px;
     cursor: pointer;
+    font-size: 16px;
+    margin: 20px;
+    padding: 10px 40px;
   }
-
+  button:hover {
+    background-color: hsl(204, 100%, 95%);
+    border-color: hsl(204, 100%, 27%);
+  }
   button:active {
     border-color: black;
   }
@@ -30,6 +30,63 @@
   #container {
     border: 2px darkred dashed;
     padding: 20px;
+  }
+
+  .search_container {
+    display: flex;
+  }
+  .result_table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .result_cell {
+    padding: 0.5rem;
+  }
+  .result_cell.head {
+    background-color: hsl(204, 100%, 27%);
+    color: white;
+  }
+  .result_row_bg {
+    background-color: hsl(204, 100%, 96%);
+  }
+
+  .loading_container {
+    display: flex;
+  }
+  .loading_bar {
+    background-color: brown;
+    height: 2.5rem;
+    width: 0.75rem;
+    animation-duration: 1.9s;
+    animation-iteration-count: infinite;
+    animation-name: loading;
+    margin-inline: 1px;
+  }
+  @keyframes loading {
+    10% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1, 0.2);
+    }
+    90% {
+      transform: scale(1, 1);
+    }
+  }
+  .loading_1 {
+    animation-delay: 0s;
+  }
+  .loading_2 {
+    animation-delay: 0.2s;
+  }
+  .loading_3 {
+    animation-delay: 0.4s;
+  }
+  .loading_4 {
+    animation-delay: 0.6s;
+  }
+  .loading_5 {
+    animation-delay: 0.8s;
   }
 </style>
 
