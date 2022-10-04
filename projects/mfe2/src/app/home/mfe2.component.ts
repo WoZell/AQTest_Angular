@@ -35,11 +35,8 @@ export class Mfe2Component implements OnInit {
     this.getRepos();
   }
 
-  sendReq() {
-    this.router.navigate(['mfe2'], {
-      queryParams: { messageText: this.requestMessage },
-    });
-    this.messagingService.setMessage(this.requestMessage);
+  searchFieldKeypress(event: KeyboardEvent): void {
+    if (event.key === 'Enter') this.search();
   }
 
   public getRepos(): void {
